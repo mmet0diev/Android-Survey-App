@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:backgroundTint="#A7A7A7"
+    tools:context="com.example.msa.RegisterScreen" >
+
+    <TextView
+        android:id="@+id/regtitle"
+        android:layout_width="327dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="60dp"
+        android:text="Register Screen"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rusertxt"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:text="username"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/rpasstxt"
+        android:layout_width="160dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="60dp"
+        android:text="password"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/rusertxt"
+        app:layout_constraintStart_toStartOf="@+id/rusertxt"
+        app:layout_constraintTop_toBottomOf="@+id/rusertxt" />
+
+    <TextView
+        android:id="@+id/rpasstxt1"
+        android:layout_width="163dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="64dp"
+        android:text="confirm password"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/rpasstxt"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="@+id/rpasstxt"
+        app:layout_constraintTop_toBottomOf="@+id/rpasstxt" />
+
+    <EditText
+        android:id="@+id/ruserinput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/rusertxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintStart_toEndOf="@+id/rusertxt"
+        app:layout_constraintTop_toTopOf="@+id/rusertxt"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/rpassinput1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/rpasstxt1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintStart_toEndOf="@+id/rpasstxt1"
+        app:layout_constraintTop_toTopOf="@+id/rpasstxt1"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="112dp"
+        android:backgroundTint="#000000"
+        android:onClick="onReg"
+        android:text="sign up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/rpassinput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/rpasstxt"
+        app:layout_constraintStart_toEndOf="@+id/rpasstxt"
+        app:layout_constraintTop_toTopOf="@+id/rpasstxt"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/cancelbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#000000"
+        android:onClick="onCancel"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

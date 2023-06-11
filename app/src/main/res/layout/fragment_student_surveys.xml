@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/surveystitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text="Available surveys"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/layoutSurveys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="#000000">
+
+        <!-- Your existing layout elements -->
+
+        <Button
+            android:id="@+id/view_answers_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="9dp"
+            android:backgroundTint="#575757"
+            android:onClick="viewAnswers"
+            android:text="View Answers"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/logoutbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignTop="@+id/view_answers_button"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:backgroundTint="#5C5B5B"
+            android:onClick="logOut"
+            android:text="Logout"
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+</LinearLayout>
+
