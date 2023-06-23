@@ -91,6 +91,5 @@ public class StudentPane extends AppCompatActivity {
     public void logOut(View view) {
         Toast.makeText(this, "Logged out", Toast.LENGTH_LONG).show();
         finish();
-        return;
     }
 }

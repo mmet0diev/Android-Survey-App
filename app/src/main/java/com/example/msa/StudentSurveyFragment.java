@@ -29,12 +29,9 @@ public class StudentSurveyFragment extends Fragment {
     private ArrayList<Survey> currentSurveys;
     private ArrayList<String> completedSurveys;
 
-
     public StudentSurveyFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

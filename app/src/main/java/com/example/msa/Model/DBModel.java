@@ -29,8 +29,6 @@ public class DBModel extends SQLiteOpenHelper {
     private final String surveyTable = "Survey";
     private final String surveyColId = "id";
     private final String surveyTitleCol = "title";
-    private final String surveyStartCol = "start";
-    private final String surveyEndCol = "endd";
 
     /* User Table */
     private final String userTable = "User";
@@ -60,7 +58,7 @@ public class DBModel extends SQLiteOpenHelper {
 
             String sqlCreateStatement3 = "CREATE TABLE " + surveyTable + " ( " + surveyColId +
                     " INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, " +
-                    surveyTitleCol + " TEXT NOT NULL,\n" + surveyStartCol + " TEXT ," + surveyEndCol + " TEXT )";
+                    surveyTitleCol + " TEXT NOT NULL)";
 
             db.execSQL(sqlCreateStatement3);
 
@@ -204,10 +202,8 @@ public class DBModel extends SQLiteOpenHelper {
             do {
                 int id = cursor.getInt(0);
                 String title = cursor.getString(1);
-                String start = cursor.getString(2);
-                String end = cursor.getString(3);
 
-                Survey s = new Survey(id, title, start, end);
+                Survey s = new Survey(id, title);
                 surveyList.add(s);
             } while (cursor.moveToNext());
         }
