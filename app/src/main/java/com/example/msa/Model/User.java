@@ -8,14 +8,14 @@ public class User implements Serializable {
     private int isAdmin;
     private String loginName;
     private String password;
-    private ArrayList<String> surveyTitles;
+    private String surveysDone;
 
-    public User(int id, int isAdmin, String loginName, String password) {
+    public User(int id, int isAdmin, String loginName, String password, String surveysDone) {
         this.id = id;
         this.isAdmin = isAdmin;
         this.loginName = loginName;
         this.password = password;
-        this.surveyTitles = new ArrayList<>();
+        this.surveysDone = surveysDone;
     }
 
     public int getId() {
@@ -48,18 +48,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void rmSurvey(String s){
-        this.surveyTitles.remove(s);
-    }
-
-    public void addSurvey(String s){
-        this.surveyTitles.add(s);
-    }
-
-    public ArrayList<String> getSurveyTitles(){
-        return this.surveyTitles;
     }
 
     @Override

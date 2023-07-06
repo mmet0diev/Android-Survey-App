@@ -29,7 +29,7 @@ public class RegisterScreen extends AppCompatActivity {
             Toast.makeText(this, "Some/all fields not filled", Toast.LENGTH_LONG).show();
         }else{
             if(reg_pass.equals(reg_pass1)) {
-                User newUsr = new User(-1, 0, reg_user, reg_pass);
+                User newUsr = new User(-1, 0, reg_user, reg_pass, "");
                 DBModel myDB = new DBModel(this);
                 int res = myDB.addUser(newUsr);
                 if(res == 1){

@@ -84,7 +84,7 @@ public class ActiveSurvey extends AppCompatActivity {
                 ((Button) findViewById(R.id.nextbtn)).setText("Finish");
 
             }
-        } else {
+        } else if(questionNum == 10){
             // If the last question has been reached, add the answers to the database
             pushAnswersToDB();
             Toast.makeText(this, "Survey completed", Toast.LENGTH_LONG).show();
