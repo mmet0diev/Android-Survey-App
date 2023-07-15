@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BCBCBC"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="411dp"
         android:layout_height="644dp"
-        android:background="#A8A8A8"
+        android:background="#FFFFFF"
         android:gravity="center"
         android:orientation="vertical"
+        android:outlineProvider="bounds"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admintitleview"
@@ -23,7 +24,7 @@
             android:id="@+id/viewanswersbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#757575"
+            android:backgroundTint="#F8F8F8"
             android:text="view answers"
             android:textColor="#000000" />
 
@@ -31,7 +32,7 @@
             android:id="@+id/viewquestionsbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#757575"
+            android:backgroundTint="#FFFFFF"
             android:text="view questions"
             android:textColor="#000000" />
 
@@ -39,7 +40,7 @@
             android:id="@+id/viewsurveysbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#757575"
+            android:backgroundTint="#F6F6F6"
             android:text="view surveys"
             android:textColor="#000000" />
 
@@ -47,7 +48,7 @@
             android:id="@+id/viewusersbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#757575"
+            android:backgroundTint="#FFFFFF"
             android:text="view users"
             android:textColor="#000000" />
     </LinearLayout>
@@ -56,7 +57,7 @@
         android:id="@+id/admintitleview"
         android:layout_width="410dp"
         android:layout_height="39dp"
-        android:background="#A1A1A1"
+        android:background="#FDFDFD"
         android:text="ADMIN PANE"
         android:textAlignment="center"
         android:textColor="#000000"

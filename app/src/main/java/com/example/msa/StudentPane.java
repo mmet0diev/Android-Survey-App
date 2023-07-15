@@ -36,10 +36,8 @@ public class StudentPane extends AppCompatActivity {
 
         User loggedUser = getLoggedUser(loggedUserName);
 
-        populateCurrentStudSurveys();
-
         Bundle bundle = new Bundle();
-        bundle.putSerializable("loggedUser", loggedUser);
+        bundle.putSerializable("loggedUser", loggedUser.getId());
 
         StudentSurveyFragment fragment = new StudentSurveyFragment();
         fragment.setArguments(bundle);
@@ -61,18 +59,8 @@ public class StudentPane extends AppCompatActivity {
         return loggeduser;
     }
 
-    public void populateCurrentStudSurveys() {
-        User currUser = getLoggedUser(loggedUserName);
-        if (currUser != null) {
-            ArrayList<String> allSurvTitles = getCurrentSurveyTitles(availableSurveys);
-            for (String sTitle : allSurvTitles) {
-                currUser.addSurvey(sTitle);
-            }
-        }
-    }
-
     public ArrayList<String> getCurrentStudentSurveyTitles() {
-        return getLoggedUser(loggedUserName).getSurveyTitles();
+        return getLoggedUser(loggedUserName).getSurveysList("");
     }
 
     public ArrayList<String> getCurrentSurveyTitles(ArrayList<Survey> surveys) {

@@ -36,7 +36,7 @@ public class DBModel extends SQLiteOpenHelper {
     private final String userIsAdminCol = "isAdmin";
     private final String userLoginNameCol = "loginName";
     private final String userPassCol = "password";
-    private final String userSurveysDoneCol = "surveysDone";
+    private final String userSurveysCol = "surveys";
 
     public DBModel(Context context) {
         super(context, DB_NAME, null, VERSION);
@@ -50,26 +50,23 @@ public class DBModel extends SQLiteOpenHelper {
             String sqlCreateStatement1 = "CREATE TABLE " + answerTable + " ( " + answerColId +
                     " INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, " + answerColAnswer + " INTEGER NOT NULL ) ";
 
-            db.execSQL(sqlCreateStatement1);
-
             String sqlCreateStatement2 = "CREATE TABLE " + questionTable + " ( " + questionColId +
                     " INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, " + questionCol + " TEXT NOT NULL)";
-
-            db.execSQL(sqlCreateStatement2);
 
             String sqlCreateStatement3 = "CREATE TABLE " + surveyTable + " ( " + surveyColId +
                     " INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, " +
                     surveyTitleCol + " TEXT NOT NULL)";
-
-            db.execSQL(sqlCreateStatement3);
 
             String sqlCreateStatement4 = "CREATE TABLE " + userTable + " (" +
                     userIdCol + " INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, " +
                     userIsAdminCol + " INTEGER NOT NULL COLLATE BINARY, " +
                     userLoginNameCol + " TEXT NOT NULL UNIQUE, " +
                     userPassCol + " TEXT NOT NULL, " +
-                    userSurveysDoneCol + " TEXT)";
+                    userSurveysCol + " TEXT)";
 
+            db.execSQL(sqlCreateStatement1);
+            db.execSQL(sqlCreateStatement2);
+            db.execSQL(sqlCreateStatement3);
             db.execSQL(sqlCreateStatement4);
 
         } catch (SQLException e) {
@@ -114,6 +111,7 @@ public class DBModel extends SQLiteOpenHelper {
         cv.put(userLoginNameCol, user.getLoginName());
         cv.put(userPassCol, user.getPassword());
         cv.put(userIsAdminCol, user.getIsAdmin());
+        cv.put(userSurveysCol, user.getSurveys()); // Save the surveys data
 
         long success = db.insert(userTable, null, cv);
 
@@ -135,7 +133,7 @@ public class DBModel extends SQLiteOpenHelper {
         String userName = user.getLoginName().toLowerCase();
 
         String sqlStatement = "SELECT * FROM " + userTable + " WHERE " + userLoginNameCol + " = ?";
-        String[] param = { userName };
+        String[] param = {userName};
         Cursor cursor = db.rawQuery(sqlStatement, param);
 
         if (cursor.moveToFirst()) {
@@ -287,32 +285,35 @@ public class DBModel extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(getUserStatement, userIdArgs);
 
         if (cursor.moveToFirst()) {
-            String existingSurveyTitles = cursor.getString(cursor.getColumnIndex(userSurveysDoneCol));
-            if (existingSurveyTitles != null && !existingSurveyTitles.isEmpty()) {
-                // Remove the survey title from the existing titles
-                String[] surveyTitles = existingSurveyTitles.split(",");
-                StringBuilder updatedSurveyTitles = new StringBuilder();
+            int columnIndex = cursor.getColumnIndex(userSurveysCol);
+            if (columnIndex >= 0) {
+                String existingSurveyTitles = cursor.getString(columnIndex);
+                if (existingSurveyTitles != null && !existingSurveyTitles.isEmpty()) {
+                    // Remove the survey title from the existing titles
+                    String[] surveyTitles = existingSurveyTitles.split(",");
+                    StringBuilder updatedSurveyTitles = new StringBuilder();
 
-                for (String title : surveyTitles) {
-                    int id = Integer.parseInt(title);
-                    if (id != surveyId) {
-                        updatedSurveyTitles.append(title).append(",");
+                    for (String title : surveyTitles) {
+                        int id = Integer.parseInt(title);
+                        if (id != surveyId) {
+                            updatedSurveyTitles.append(title).append(",");
+                        }
                     }
-                }
 
-                // Remove the trailing comma if any
-                if (updatedSurveyTitles.length() > 0 && updatedSurveyTitles.charAt(updatedSurveyTitles.length() - 1) == ',') {
-                    updatedSurveyTitles.deleteCharAt(updatedSurveyTitles.length() - 1);
-                }
+                    // Remove the trailing comma if any
+                    if (updatedSurveyTitles.length() > 0 && updatedSurveyTitles.charAt(updatedSurveyTitles.length() - 1) == ',') {
+                        updatedSurveyTitles.deleteCharAt(updatedSurveyTitles.length() - 1);
+                    }
 
-                // Update the user's survey titles
-                ContentValues cv = new ContentValues();
-                cv.put(userSurveysDoneCol, updatedSurveyTitles.toString());
-                db.update(userTable, cv, userIdCol + " = ?", userIdArgs);
+                    // Update the user's survey titles
+                    ContentValues cv = new ContentValues();
+                    cv.put(userSurveysCol, updatedSurveyTitles.toString());
+                    db.update(userTable, cv, userIdCol + " = ?", userIdArgs);
+                }
             }
-        }
 
-        cursor.close();
-        db.close();
+            cursor.close();
+            db.close();
+        }
     }
 }

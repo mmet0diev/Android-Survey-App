@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A7A7A7"
+    android:background="#FFFFFF"
     tools:context="com.example.msa.ActiveSurvey">
 
     <Button
@@ -35,7 +35,7 @@
         android:id="@+id/radGroup"
         android:layout_width="328dp"
         android:layout_height="232dp"
-        android:background="#000000"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,35 +45,35 @@
             android:id="@+id/rb1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#7A7070"
+            android:background="#FDFDFD"
             android:text="strongly agree" />
 
         <RadioButton
             android:id="@+id/rb2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#7A7070"
+            android:background="#FFFFFF"
             android:text="agree" />
 
         <RadioButton
             android:id="@+id/rb3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#7A7070"
+            android:background="#FFFFFF"
             android:text="neither agree/disagree" />
 
         <RadioButton
             android:id="@+id/rb4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#7A7070"
+            android:background="#FFFFFF"
             android:text="disagree" />
 
         <RadioButton
             android:id="@+id/rb5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#7A7070"
+            android:background="#FFFFFF"
             android:text="strongly disagree" />
     </RadioGroup>
 
@@ -84,7 +84,7 @@
         android:layout_marginTop="16dp"
         android:text="Survey title"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"

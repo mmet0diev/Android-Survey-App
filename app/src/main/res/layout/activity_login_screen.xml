@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A7A7A7"
+    android:background="#F4F4F4"
     tools:context="com.example.msa.LoginScreen">
 
     <EditText
@@ -12,7 +12,7 @@
         android:layout_width="201dp"
         android:layout_height="37dp"
         android:background="#000000"
-        android:backgroundTint="#FDFDFD"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/lpasstxt"
