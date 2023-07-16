@@ -50,31 +50,6 @@ public class ActivityStudentAnswers extends AppCompatActivity {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_student_answers_rows, parent, false);
             }
 
-            // Lookup views for data population
-            TextView[] answerTextViews = new TextView[10];
-            answerTextViews[0] = convertView.findViewById(R.id.answer1);
-            answerTextViews[1] = convertView.findViewById(R.id.answer2);
-            answerTextViews[2] = convertView.findViewById(R.id.answer3);
-            answerTextViews[3] = convertView.findViewById(R.id.answer4);
-            answerTextViews[4] = convertView.findViewById(R.id.answer5);
-            answerTextViews[5] = convertView.findViewById(R.id.answer6);
-            answerTextViews[6] = convertView.findViewById(R.id.answer7);
-            answerTextViews[7] = convertView.findViewById(R.id.answer8);
-            answerTextViews[8] = convertView.findViewById(R.id.answer9);
-            answerTextViews[9] = convertView.findViewById(R.id.answer10);
-
-            // Populate the data into the template views using the data object
-            if (answers != null && answers.size() > 0) {
-                int endIndex = Math.min(answers.size(), answerTextViews.length);
-                for (int i = endIndex - 1, j = 0; i >= 0 && j < answerTextViews.length; i--, j++) {
-                    answerTextViews[j].setText(answers.get(i).toString());
-                }
-            } else {
-                for (TextView answerTextView : answerTextViews) {
-                    answerTextView.setText("No answers yet");
-                }
-            }
-
             // Return the completed view to render on screen
             return convertView;
         }
