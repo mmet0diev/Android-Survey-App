@@ -14,21 +14,21 @@ import com.example.msa.Model.User;
 import java.util.ArrayList;
 
 public class UserPane extends AppCompatActivity {
-    private ArrayList<Survey> availableSurveys;
+    private ArrayList<Survey> allSurveys;
     private ArrayList<User> users;
     private int userid;
-
+    private User loggedUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_pane);
 
-        availableSurveys = new DBHelper(this).get_surveyList();
+        allSurveys = new DBHelper(this).get_surveyList();
         users = new DBHelper(this).get_userList();
 
         userid = getIntent().getExtras().getInt("userid");
 
-        User loggedUser = getLoggedUser(userid);
+        loggedUser = getLoggedUser(userid);
 
         Bundle bundle = new Bundle();
         bundle.putInt("userid", userid);
@@ -62,7 +62,7 @@ public class UserPane extends AppCompatActivity {
     }
 
     public void viewAnswers(View view) {
-        Intent intent = new Intent(this, ActivityStudentAnswers.class);
+        Intent intent = new Intent(this, ActivityUserAnswers.class);
         startActivity(intent);
     }
 

@@ -76,14 +76,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ActivityStudentAnswersRows"
+            android:name=".ActivityUserAnswersRows"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ActivityStudentAnswers"
+            android:name=".ActivityUserAnswers"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

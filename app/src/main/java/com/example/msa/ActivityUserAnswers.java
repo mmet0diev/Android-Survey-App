@@ -15,7 +15,7 @@ import com.example.msa.Model.DBHelper;
 
 import java.util.ArrayList;
 
-public class ActivityStudentAnswers extends AppCompatActivity {
+public class ActivityUserAnswers extends AppCompatActivity {
 
     private ArrayList<Answer> answers;
 

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ActivityStudentAnswersRows extends AppCompatActivity {
+public class ActivityUserAnswersRows extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
