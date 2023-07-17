@@ -42,9 +42,9 @@ public class LoginScreen extends AppCompatActivity {
         else {
             if (checkIfValidLogin(u_name, u_pass) == 0) {
                 if(user.getIsAdmin() == 0) {
-                    Intent i = new Intent(this, StudentPane.class);
+                    Intent i = new Intent(this, UserPane.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("username", user.getLoginName());
+                    bundle.putInt("userid", user.getId());
                     i.putExtras(bundle);
                     startActivity(i);
                     Toast.makeText(this, "Logged in", Toast.LENGTH_LONG).show();

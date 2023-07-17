@@ -2,15 +2,9 @@ package com.example.msa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.msa.Model.DBHelper;
@@ -19,27 +13,27 @@ import com.example.msa.Model.User;
 
 import java.util.ArrayList;
 
-public class StudentPane extends AppCompatActivity {
+public class UserPane extends AppCompatActivity {
     private ArrayList<Survey> availableSurveys;
     private ArrayList<User> users;
-    private String loggedUserName;
+    private int userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_pane);
+        setContentView(R.layout.activity_user_pane);
 
         availableSurveys = new DBHelper(this).get_surveyList();
         users = new DBHelper(this).get_userList();
 
-        loggedUserName = getIntent().getExtras().getString("username");
+        userid = getIntent().getExtras().getInt("userid");
 
-        User loggedUser = getLoggedUser(loggedUserName);
+        User loggedUser = getLoggedUser(userid);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("loggedUser", loggedUser.getId());
+        bundle.putInt("userid", userid);
 
-        StudentSurveyFragment fragment = new StudentSurveyFragment();
+        UserSurveyFragment fragment = new UserSurveyFragment();
         fragment.setArguments(bundle);
 
         getSupportFragmentManager()
@@ -48,19 +42,15 @@ public class StudentPane extends AppCompatActivity {
                 .commit();
     }
 
-    public User getLoggedUser(String username) {
-        User loggeduser = null;
+    public User getLoggedUser(int id) {
+        User res = null;
         for (User u : users) {
-            if (u.getLoginName().equals(username)) {
-                loggeduser = u;
+            if (u.getId() == id) {
+                res = u;
                 break;
             }
         }
-        return loggeduser;
-    }
-
-    public ArrayList<String> getCurrentStudentSurveyTitles() {
-        return getLoggedUser(loggedUserName).getSurveysList("");
+        return res;
     }
 
     public ArrayList<String> getCurrentSurveyTitles(ArrayList<Survey> surveys) {

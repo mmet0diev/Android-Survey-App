@@ -9,14 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.msa.Model.Answer;
 import com.example.msa.Model.DBHelper;
-import com.example.msa.Model.DBModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityStudentAnswers extends AppCompatActivity {
 
@@ -25,7 +22,7 @@ public class ActivityStudentAnswers extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_answers_listview);
+        setContentView(R.layout.user_answers_listview);
 
         answers = new DBHelper(this).get_answerList();
 
@@ -47,7 +44,7 @@ public class ActivityStudentAnswers extends AppCompatActivity {
 
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_student_answers_rows, parent, false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_user_answers_rows, parent, false);
             }
 
             // Return the completed view to render on screen

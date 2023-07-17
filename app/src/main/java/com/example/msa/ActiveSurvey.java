@@ -1,14 +1,12 @@
 package com.example.msa;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,22 +56,27 @@ public class ActiveSurvey extends AppCompatActivity {
                 answers.add(1);
                 questionNum++;
                 ((TextView) findViewById(R.id.questiontxt)).setText(questions.get(questionNum - 1).toString());
+                ((RadioGroup) findViewById(R.id.radGroup)).clearCheck();
             } else if (((RadioButton) findViewById(R.id.rb2)).isChecked()) {
                 answers.add(2);
                 questionNum++;
                 ((TextView) findViewById(R.id.questiontxt)).setText(questions.get(questionNum - 1).toString());
+                ((RadioGroup) findViewById(R.id.radGroup)).clearCheck();
             } else if (((RadioButton) findViewById(R.id.rb3)).isChecked()) {
                 answers.add(3);
                 questionNum++;
                 ((TextView) findViewById(R.id.questiontxt)).setText(questions.get(questionNum - 1).toString());
+                ((RadioGroup) findViewById(R.id.radGroup)).clearCheck();
             } else if (((RadioButton) findViewById(R.id.rb4)).isChecked()) {
                 answers.add(4);
                 questionNum++;
                 ((TextView) findViewById(R.id.questiontxt)).setText(questions.get(questionNum - 1).toString());
+                ((RadioGroup) findViewById(R.id.radGroup)).clearCheck();
             } else if (((RadioButton) findViewById(R.id.rb5)).isChecked()) {
                 answers.add(5);
                 questionNum++;
                 ((TextView) findViewById(R.id.questiontxt)).setText(questions.get(questionNum - 1).toString());
+                ((RadioGroup) findViewById(R.id.radGroup)).clearCheck();
             } else {
                 Toast.makeText(this, "No answer checked!", Toast.LENGTH_LONG).show();
             }
@@ -88,11 +91,7 @@ public class ActiveSurvey extends AppCompatActivity {
             // If the last question has been reached, add the answers to the database
             pushAnswersToDB();
             Toast.makeText(this, "Survey completed", Toast.LENGTH_LONG).show();
-            loggedUser.rmSurvey(extras.getString("title"));
-            StudentSurveyFragment studentSurveyFragment = (StudentSurveyFragment) getSupportFragmentManager().findFragmentById(R.id.layoutSurveys);
-            if (studentSurveyFragment != null) {
-                studentSurveyFragment.addCompletedSurvey(extras.getString("title"));
-            }
+            UserSurveyFragment userSurveyFragment = (UserSurveyFragment) getSupportFragmentManager().findFragmentById(R.id.layoutSurveys);
             finish();
         }
     }
