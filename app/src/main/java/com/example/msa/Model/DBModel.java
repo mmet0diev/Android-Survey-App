@@ -87,7 +87,12 @@ public class DBModel extends SQLiteOpenHelper {
      */
 
     public void addQuestion(Question question) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
 
+        cv.put(questionCol, question.getText());
+
+        db.insert(questionTable, null, cv);
     }
 
     public void addAnswer(Answer answer) {
