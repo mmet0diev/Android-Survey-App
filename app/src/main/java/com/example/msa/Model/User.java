@@ -5,19 +5,19 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class User{
+public class User {
     private int id;
     private int isAdmin;
     private String loginName;
     private String password;
     private String surveys;
 
-    public User(int id, int isAdmin, String loginName, String password, String surveysDone) {
+    public User(int id, int isAdmin, String loginName, String password, String availableSurveys) {
         this.id = id;
         this.isAdmin = isAdmin;
         this.loginName = loginName;
         this.password = password;
-        this.surveys = surveysDone;
+        this.surveys = availableSurveys;
     }
 
     public int getId() {
@@ -65,6 +65,6 @@ public class User{
     @Override
     public String toString() {
         return "User: id -> " + getId() + "\nusername -> " + getLoginName() + "\nisAdmin -> " + getIsAdmin()
-                + "\nsurveys -> " + getSurveysList(getSurveys());
+                + "\nsurveys -> " + getSurveys();
     }
 }

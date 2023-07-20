@@ -34,6 +34,7 @@ public class RegisterScreen extends AppCompatActivity {
                 int res = myDB.addUser(newUsr);
                 if(res == 1){
                     Toast.makeText(this, "User registered", Toast.LENGTH_LONG).show();
+                    finish();
                 }else if(res == -3){
                     Toast.makeText(this, "Username already exists", Toast.LENGTH_LONG).show();
                 }else{
