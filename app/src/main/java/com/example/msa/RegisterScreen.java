@@ -39,6 +39,7 @@ public class RegisterScreen extends AppCompatActivity {
                     Toast.makeText(this, "Username already exists", Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(this, "Error, user could not be registered", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }else{
                 Toast.makeText(this, "passwords don't match", Toast.LENGTH_LONG).show();
