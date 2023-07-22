@@ -14,10 +14,10 @@ import com.example.msa.Model.User;
 import java.util.ArrayList;
 
 public class UserPane extends AppCompatActivity {
-    private ArrayList<Survey> allSurveys;
+    public ArrayList<Survey> allSurveys;
     private ArrayList<User> users;
     private int userid;
-    private User loggedUser;
+    public User loggedUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

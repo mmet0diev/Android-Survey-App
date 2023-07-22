@@ -265,24 +265,36 @@ public class DBModel extends SQLiteOpenHelper {
         return userList;
     }
 
-    public User getUser(String loginName) {
-        SQLiteDatabase db = getReadableDatabase();
+    public User getUserById(int userId) {
+        User user = null;
+        SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql = "SELECT * FROM " + userTable + " WHERE " + userLoginNameCol + " = ?";
-        String[] args = {loginName};
-        Cursor cursor = db.rawQuery(sql, args);
+        // Define the columns you want to retrieve from the User table
+        String[] columns = {userIdCol, userIsAdminCol, userLoginNameCol, userPassCol, userSurveysCol};
 
-        if (cursor.moveToFirst()) {
-            int id = cursor.getInt(0);
-            int isAdmin = cursor.getInt(1);
-            String name = cursor.getString(2);
-            String password = cursor.getString(3);
-            db.close();
-            return new User(id, isAdmin, name, password, "");
-        } else {
-            db.close();
-            return null;
+        // Define the WHERE clause to find the user by ID
+        String selection = userIdCol + " = ?";
+        String[] selectionArgs = {String.valueOf(userId)};
+
+        // Query the User table to get the user with the given ID
+        Cursor cursor = db.query(userTable, columns, selection, selectionArgs, null, null, null);
+
+        // Check if the cursor has a valid result
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndex(userIdCol));
+            int isAdmin = cursor.getInt(cursor.getColumnIndex(userIsAdminCol));
+            String loginName = cursor.getString(cursor.getColumnIndex(userLoginNameCol));
+            String password = cursor.getString(cursor.getColumnIndex(userPassCol));
+            String surveys = cursor.getString(cursor.getColumnIndex(userSurveysCol));
+
+            // Create the User object with the retrieved data
+            user = new User(id, isAdmin, loginName, password, surveys);
+            cursor.close();
         }
+
+        // Close the database connection and return the User object
+        db.close();
+        return user;
     }
 
     public void removeSurvey(int surveyId) {

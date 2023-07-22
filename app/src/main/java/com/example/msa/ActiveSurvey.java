@@ -32,8 +32,7 @@ public class ActiveSurvey extends AppCompatActivity {
     private DBModel dbModel;
     private ArrayList<Question> questions;
     private ArrayList<Integer> answers;
-    User loggedUser;
-    Bundle extras;
+    private User loggedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +42,12 @@ public class ActiveSurvey extends AppCompatActivity {
         dbModel = new DBModel(this);
         questions = new DBHelper(this).getQuestionList();
         answers = new ArrayList<>();
-        loggedUser = (User) getIntent().getSerializableExtra("loggedUser");
-        extras = getIntent().getExtras();
-        ((TextView) findViewById(R.id.questiontxt)).setText(questions.get(questionNum - 1).toString());
 
-        ((TextView) findViewById(R.id.surveytitletxt)).setText(extras.getString("title"));
+        int userId = getIntent().getIntExtra("userId", -1);
+        loggedUser = dbModel.getUserById(userId);
+
+        ((TextView) findViewById(R.id.questiontxt)).setText(questions.get(questionNum - 1).toString());
+        ((TextView) findViewById(R.id.surveytitletxt)).setText(getIntent().getStringExtra("title"));
     }
 
     public void onNext(View view) {

@@ -1,18 +1,24 @@
 package com.example.msa;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
+import com.example.msa.Model.DBHelper;
+import com.example.msa.Model.Survey;
+
+import java.util.ArrayList;
 
 public class UserSurveyFragment extends Fragment {
 
     private String currentSurveys;
+    private ArrayList<Survey> surveys;
 
     public UserSurveyFragment() {
         // Required empty public constructor
@@ -25,10 +31,39 @@ public class UserSurveyFragment extends Fragment {
 
         LinearLayout layoutSurveys = view.findViewById(R.id.layoutSurveys);
 
-        currentSurveys = "";
+        ArrayList<Survey> surveys = getAvailableSurveys(); // Replace this with your method to fetch the available surveys
 
-        Bundle arguments = getArguments();
+        for (Survey survey : surveys) {
+            TextView surveyTextView = new TextView(requireContext());
+            surveyTextView.setText(survey.getTitle());
+            surveyTextView.setTextSize(18);
+            surveyTextView.setPadding(10, 10, 10, 10);
+            surveyTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle the survey click event here
+                    // Start the ActiveSurvey activity and pass the necessary data
+                    startActiveSurveyActivity(survey);
+                }
+            });
+
+            layoutSurveys.addView(surveyTextView);
+        }
 
         return view;
+    }
+
+    private ArrayList<Survey> getAvailableSurveys() {
+        // Implement this method to retrieve the available surveys for the logged-in user
+        // For now, you can return the allSurveys list as a placeholder.
+        return ((UserPane) requireActivity()).allSurveys;
+    }
+
+    private void startActiveSurveyActivity(Survey survey) {
+        Intent intent = new Intent(requireContext(), ActiveSurvey.class);
+        int userId = ((UserPane) requireActivity()).loggedUser.getId();
+        intent.putExtra("userId", userId);
+        intent.putExtra("title", survey.getTitle());
+        startActivity(intent);
     }
 }
