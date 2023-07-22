@@ -41,7 +41,7 @@ public class ActiveSurvey extends AppCompatActivity {
         setContentView(R.layout.activity_active_survey);
 
         dbModel = new DBModel(this);
-        questions = new DBHelper(this).get_questionList();
+        questions = new DBHelper(this).getQuestionList();
         answers = new ArrayList<>();
         loggedUser = (User) getIntent().getSerializableExtra("loggedUser");
         extras = getIntent().getExtras();

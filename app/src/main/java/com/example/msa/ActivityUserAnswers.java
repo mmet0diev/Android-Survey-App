@@ -24,7 +24,7 @@ public class ActivityUserAnswers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_answers_listview);
 
-        answers = new DBHelper(this).get_answerList();
+        answers = new DBHelper(this).getAnswerList();
 
         ListView answerListView = findViewById(R.id.answerlistview);
         SurveyAnswerAdapter adapter = new SurveyAnswerAdapter(this, answers);

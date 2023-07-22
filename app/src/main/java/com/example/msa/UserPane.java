@@ -23,8 +23,8 @@ public class UserPane extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_pane);
 
-        allSurveys = new DBHelper(this).get_surveyList();
-        users = new DBHelper(this).get_userList();
+        allSurveys = new DBHelper(this).getSurveyList();
+        users = new DBHelper(this).getUserList();
 
         userid = getIntent().getExtras().getInt("userid");
 

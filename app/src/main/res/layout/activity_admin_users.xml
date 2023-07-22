@@ -23,6 +23,52 @@
             android:textColor="#000000"
             android:textSize="24sp" />
 
+        <EditText
+            android:id="@+id/addUserLoginName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Login Name"
+            app:layout_constraintTop_toBottomOf="@id/users_listview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/addUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Password"
+            app:layout_constraintTop_toBottomOf="@id/addUserLoginName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <Switch
+            android:id="@+id/addUserIsAdminSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is Admin"
+            android:checked="false"
+            app:layout_constraintTop_toBottomOf="@id/addUserPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/addUserBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="addUser"
+            android:text="Add User"
+            app:layout_constraintTop_toBottomOf="@id/addUserIsAdminSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
         <ListView
             android:id="@+id/users_listview"
             android:layout_width="match_parent"

@@ -8,16 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.msa.Model.DBHelper;
+import com.example.msa.Model.DBModel;
 import com.example.msa.Model.User;
 
 import java.util.ArrayList;
 
 public class ActivityAdminUsers extends AppCompatActivity {
     private DBHelper dbHelper;
+    private DBModel dbModel;
     private ArrayList<User> users;
 
     @Override
@@ -26,12 +31,68 @@ public class ActivityAdminUsers extends AppCompatActivity {
         setContentView(R.layout.activity_admin_users);
 
         dbHelper = new DBHelper(this);
-        users = dbHelper.get_userList();
+        dbModel = new DBModel(this);
+        users = dbHelper.getUserList();
 
         ListView listView = findViewById(R.id.users_listview);
         UserAdapter adapter = new UserAdapter(this, users);
         listView.setAdapter(adapter);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dbModel != null) {
+            dbModel.close(); // Close the database connection
+        }
+    }
+
+    public void addUser(View view) {
+        EditText addUserLoginName = findViewById(R.id.addUserLoginName);
+        EditText addUserPassword = findViewById(R.id.addUserPassword);
+        Switch addUserIsAdminSwitch = findViewById(R.id.addUserIsAdminSwitch);
+
+        String loginName = addUserLoginName.getText().toString().trim();
+        String password = addUserPassword.getText().toString().trim();
+        int isAdmin = addUserIsAdminSwitch.isChecked() ? 1 : 0;
+        String avlbSurveys = "";
+
+        if (!loginName.isEmpty() && !password.isEmpty()) {
+            // Create a new User object with the provided details
+            User newUser = new User(-1, isAdmin, loginName, password, avlbSurveys);
+
+            // Save the new user in the database
+            int result = dbModel.addUser(newUser);
+
+            if (result == 1) {
+                // If the user was added successfully, update the UI
+                // The id field in the newUser object will be updated automatically
+
+                // Add the new user to the users list and update the ListView
+                users.add(newUser);
+                UserAdapter adapter = (UserAdapter) ((ListView) findViewById(R.id.users_listview)).getAdapter();
+                adapter.notifyDataSetChanged();
+
+                // Clear the input fields after adding the user
+                addUserLoginName.setText("");
+                addUserPassword.setText("");
+                addUserIsAdminSwitch.setChecked(false);
+
+                // Show a toast message indicating success
+                Toast.makeText(this, "User added successfully!", Toast.LENGTH_SHORT).show();
+            } else if (result == -3) {
+                // Handle the case where the user name already exists
+                Toast.makeText(this, "User name already exists. Please choose a different name.", Toast.LENGTH_SHORT).show();
+            } else {
+                // Handle the case where the user could not be added
+                Toast.makeText(this, "Error adding user. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // Handle the case where the user didn't provide login name or password
+            Toast.makeText(this, "Please enter login name and password.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     public class UserAdapter extends BaseAdapter {
 

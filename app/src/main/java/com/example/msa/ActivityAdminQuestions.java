@@ -27,7 +27,7 @@ public class ActivityAdminQuestions extends AppCompatActivity {
         setContentView(R.layout.activity_admin_questions);
 
         dbHelper = new DBHelper(this);
-        questions = dbHelper.get_questionList();
+        questions = dbHelper.getQuestionList();
 
         ListView listView = findViewById(R.id.quest_listview);
         QuestionAdapter adapter = new QuestionAdapter(this, questions);

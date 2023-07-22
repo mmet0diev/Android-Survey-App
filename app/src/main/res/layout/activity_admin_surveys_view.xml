@@ -24,5 +24,6 @@
             android:textAlignment="textStart"
             android:textColor="#000000"
             android:textSize="20sp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

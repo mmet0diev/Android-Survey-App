@@ -105,6 +105,18 @@ public class DBModel extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Add a new survey to the database
+    public long addSurvey(Survey survey) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(surveyTitleCol, survey.getTitle());
+
+        long success = db.insert(surveyTable, null, cv);
+        db.close();
+        return success;
+    }
+
     public int addUser(User user) {
         int isUserNameAlreadyExists = checkUserName(user);
         if (isUserNameAlreadyExists < 0)

@@ -24,7 +24,7 @@ public class LoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-        current_users = new DBHelper(this).get_userList();
+        current_users = new DBHelper(this).getUserList();
         login_user = findViewById(R.id.luserinput);
         login_pass = findViewById(R.id.lpassinput);
         String loginName = login_user.getText().toString();

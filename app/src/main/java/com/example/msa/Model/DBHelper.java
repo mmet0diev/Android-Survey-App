@@ -5,33 +5,33 @@ import android.content.Context;
 import java.util.ArrayList;
 
 public class DBHelper {
-    private static ArrayList<Answer> answerList;
-    private static ArrayList<Question> questionList;
-    private static ArrayList<Survey> surveyList;
-    private static ArrayList<User> userList;
-    private static DBModel DBHelper;
+    private DBModel dbModel;
+    private ArrayList<Answer> answerList;
+    private ArrayList<Question> questionList;
+    private ArrayList<Survey> surveyList;
+    private ArrayList<User> userList;
 
-    public DBHelper(Context context){
-        DBHelper = new DBModel(context);
-        answerList = DBHelper.getAllAnswers();
-        questionList = DBHelper.getAllQuestions();
-        surveyList = DBHelper.getAllSurveys();
-        userList = DBHelper.getAllUsers();
+    public DBHelper(Context context) {
+        dbModel = new DBModel(context);
+        answerList = dbModel.getAllAnswers();
+        questionList = dbModel.getAllQuestions();
+        surveyList = dbModel.getAllSurveys();
+        userList = dbModel.getAllUsers();
     }
 
-    public ArrayList<Answer> get_answerList(){
+    public ArrayList<Answer> getAnswerList() {
         return answerList;
     }
 
-    public ArrayList<Question> get_questionList(){
+    public ArrayList<Question> getQuestionList() {
         return questionList;
     }
 
-    public ArrayList<Survey> get_surveyList(){
+    public ArrayList<Survey> getSurveyList() {
         return surveyList;
     }
 
-    public ArrayList<User> get_userList(){
+    public ArrayList<User> getUserList() {
         return userList;
     }
 }

@@ -29,8 +29,8 @@ public class ActivityAdminAnswers extends AppCompatActivity {
         setContentView(R.layout.activity_admin_answers);
 
         dbHelper = new DBHelper(this);
-        answers = dbHelper.get_answerList();
-        surveys = dbHelper.get_surveyList();
+        answers = dbHelper.getAnswerList();
+        surveys = dbHelper.getSurveyList();
 
         ListView listView = findViewById(R.id.answers_listview);
         AnswerAdapter adapter = new AnswerAdapter(this, surveys, answers);

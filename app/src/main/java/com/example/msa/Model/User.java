@@ -57,8 +57,8 @@ public class User {
     }
 
     public ArrayList<String> getSurveysList(String surveys) {
-        String[] surveysArray = surveys.split(", "); // Split the string into an array of strings
-        ArrayList<String> surveysList = new ArrayList<>(Arrays.asList(surveysArray)); // Convert the array to an ArrayList
+        String[] surveysArray = surveys.split(","); // Remove the space after the comma
+        ArrayList<String> surveysList = new ArrayList<>(Arrays.asList(surveysArray));
         return surveysList;
     }
 
