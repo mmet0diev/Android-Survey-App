@@ -62,7 +62,7 @@ public class DBModel extends SQLiteOpenHelper {
                     userIsAdminCol + " INTEGER NOT NULL COLLATE BINARY, " +
                     userLoginNameCol + " TEXT NOT NULL UNIQUE, " +
                     userPassCol + " TEXT NOT NULL, " +
-                    userSurveysCol + " TEXT)";
+                    userSurveysCol + " TEXT NOT NULL UNIQUE )"; // Add the surveys column with a default value of an empty string
 
             db.execSQL(sqlCreateStatement1);
             db.execSQL(sqlCreateStatement2);
@@ -76,7 +76,15 @@ public class DBModel extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase p0, int p1, int p2) {
-        // Not yet implemented
+        if (VERSION < 2) {
+            // Perform the necessary changes to update from version 1 to version 2
+            // For example, if you need to add new columns or modify existing ones, do it here
+
+            // You can use the ALTER TABLE statement to add columns, like this:
+            // String sqlAlterStatement = "ALTER TABLE " + userTable + " ADD COLUMN " + userSurveysCol + " TEXT DEFAULT ''";
+            // db.execSQL(sqlAlterStatement);
+        }
+        // Handle other version updates if needed...
     }
 
     /**
@@ -147,9 +155,9 @@ public class DBModel extends SQLiteOpenHelper {
             return -2;
         }
 
-        String userName = user.getLoginName().toLowerCase();
+        String userName = user.getLoginName().trim().toLowerCase();
 
-        String sqlStatement = "SELECT * FROM " + userTable + " WHERE " + userLoginNameCol + " = ?";
+        String sqlStatement = "SELECT * FROM " + userTable + " WHERE LOWER(" + userLoginNameCol + ") = ?";
         String[] param = {userName};
         Cursor cursor = db.rawQuery(sqlStatement, param);
 

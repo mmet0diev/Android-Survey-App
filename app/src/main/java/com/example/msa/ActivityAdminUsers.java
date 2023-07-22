@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,8 @@ public class ActivityAdminUsers extends AppCompatActivity {
     }
 
     public void addUser(View view) {
+        Log.d("AddUser", "addUser method called");
+
         EditText addUserLoginName = findViewById(R.id.addUserLoginName);
         EditText addUserPassword = findViewById(R.id.addUserPassword);
         Switch addUserIsAdminSwitch = findViewById(R.id.addUserIsAdminSwitch);
@@ -56,6 +59,10 @@ public class ActivityAdminUsers extends AppCompatActivity {
         String password = addUserPassword.getText().toString().trim();
         int isAdmin = addUserIsAdminSwitch.isChecked() ? 1 : 0;
         String avlbSurveys = "";
+
+        Log.d("AddUser", "Login Name: " + loginName);
+        Log.d("AddUser", "Password: " + password);
+        Log.d("AddUser", "Is Admin: " + isAdmin);
 
         if (!loginName.isEmpty() && !password.isEmpty()) {
             // Create a new User object with the provided details
