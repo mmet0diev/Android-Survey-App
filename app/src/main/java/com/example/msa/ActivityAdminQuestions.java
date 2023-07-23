@@ -8,30 +8,84 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.msa.Model.DBHelper;
+import com.example.msa.Model.DBModel;
 import com.example.msa.Model.Question;
 
 import java.util.ArrayList;
 
 public class ActivityAdminQuestions extends AppCompatActivity {
 
+    private DBModel dbModel;
     private DBHelper dbHelper;
     private ArrayList<Question> questions;
-
+    private EditText addQuestionEditText;
+    private Button addQuestionButton;
+    private QuestionAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_questions);
 
+        dbModel = new DBModel(this);
         dbHelper = new DBHelper(this);
         questions = dbHelper.getQuestionList();
 
         ListView listView = findViewById(R.id.quest_listview);
-        QuestionAdapter adapter = new QuestionAdapter(this, questions);
+        adapter = new QuestionAdapter(this, questions);
         listView.setAdapter(adapter);
+
+        // Get references to the EditText and Button for adding questions
+        addQuestionEditText = findViewById(R.id.addQuestionTxt);
+        addQuestionButton = findViewById(R.id.addQuestionBtn);
+
+        // Set the click listener for the "Add" button
+        addQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle adding a new question
+                addNewQuestion();
+            }
+        });
+    }
+
+    // Method to handle adding a new question
+    private void addNewQuestion() {
+        // Get the question text from the EditText
+        String newQuestionText = addQuestionEditText.getText().toString().trim();
+
+        if (newQuestionText.isEmpty()) {
+            // If the question text is empty, show a message to the user
+            Toast.makeText(this, "Please enter a question.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Create a new Question object with the provided question text
+        Question newQuestion = new Question(-1, newQuestionText);
+
+        // Insert the new question into the database
+        long success = dbModel.addQuestion(newQuestion);
+
+        if (success != -1) {
+            // If the insertion was successful, update the question list and refresh the ListView
+            questions.add(newQuestion);
+            adapter.notifyDataSetChanged();
+
+            // Clear the EditText after adding the question
+            addQuestionEditText.setText("");
+
+            // Show a message to the user indicating successful addition
+            Toast.makeText(this, "Question added successfully.", Toast.LENGTH_SHORT).show();
+        } else {
+            // Handle the case where the insertion failed
+            Toast.makeText(this, "Failed to add the question.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public class QuestionAdapter extends BaseAdapter {

@@ -94,13 +94,15 @@ public class DBModel extends SQLiteOpenHelper {
      * return -3 : user name already exists
      */
 
-    public void addQuestion(Question question) {
+    public long addQuestion(Question question) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(questionCol, question.getText());
 
-        db.insert(questionTable, null, cv);
+        long success = db.insert(questionTable, null, cv);
+        db.close();
+        return success;
     }
 
     public void addAnswer(Answer answer) {
