@@ -323,44 +323,4 @@ public class DBModel extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void removeSurveyFromUser(int userId, int surveyId) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        // Get the existing survey titles of the user
-        String getUserStatement = "SELECT * FROM " + userTable + " WHERE " + userIdCol + " = ?";
-        String[] userIdArgs = {String.valueOf(userId)};
-        Cursor cursor = db.rawQuery(getUserStatement, userIdArgs);
-
-        if (cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndex(userSurveysCol);
-            if (columnIndex >= 0) {
-                String existingSurveyTitles = cursor.getString(columnIndex);
-                if (existingSurveyTitles != null && !existingSurveyTitles.isEmpty()) {
-                    // Remove the survey title from the existing titles
-                    String[] surveyTitles = existingSurveyTitles.split(",");
-                    StringBuilder updatedSurveyTitles = new StringBuilder();
-
-                    for (String title : surveyTitles) {
-                        int id = Integer.parseInt(title);
-                        if (id != surveyId) {
-                            updatedSurveyTitles.append(title).append(",");
-                        }
-                    }
-
-                    // Remove the trailing comma if any
-                    if (updatedSurveyTitles.length() > 0 && updatedSurveyTitles.charAt(updatedSurveyTitles.length() - 1) == ',') {
-                        updatedSurveyTitles.deleteCharAt(updatedSurveyTitles.length() - 1);
-                    }
-
-                    // Update the user's survey titles
-                    ContentValues cv = new ContentValues();
-                    cv.put(userSurveysCol, updatedSurveyTitles.toString());
-                    db.update(userTable, cv, userIdCol + " = ?", userIdArgs);
-                }
-            }
-
-            cursor.close();
-            db.close();
-        }
-    }
 }

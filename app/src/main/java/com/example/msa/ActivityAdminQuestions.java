@@ -45,6 +45,7 @@ public class ActivityAdminQuestions extends AppCompatActivity {
         addQuestionEditText = findViewById(R.id.addQuestionTxt);
         addQuestionButton = findViewById(R.id.addQuestionBtn);
 
+
         // Set the click listener for the "Add" button
         addQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override

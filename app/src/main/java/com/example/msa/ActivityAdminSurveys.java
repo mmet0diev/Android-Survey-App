@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -73,7 +74,6 @@ public class ActivityAdminSurveys extends AppCompatActivity {
                 addSurveyTxt.setText("");
             } else {
                 // Handle the case where the survey could not be added
-
             }
         } else {
             // Handle the case where the user didn't provide a survey name
@@ -119,7 +119,28 @@ public class ActivityAdminSurveys extends AppCompatActivity {
             TextView surveyTxt = view.findViewById(R.id.surveytxt);
             surveyTxt.setText(survey.toString());
 
+            // Get the "Remove" button view and set an OnClickListener
+            Button removeButton = view.findViewById(R.id.removeSurveyBtn);
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Call the removeSurvey method to remove the survey from the list and database
+                    removeSurvey(position);
+                }
+            });
+
             return view;
+        }
+
+        public void removeSurvey(int position) {
+            Survey removedSurvey = surveys.get(position);
+            // Remove the survey from the list
+            surveys.remove(position);
+            // Notify the adapter that the data has changed
+            notifyDataSetChanged();
+
+            // Remove the survey from the database using the DBModel
+            dbModel.removeSurvey(removedSurvey.getId());
         }
     }
 }

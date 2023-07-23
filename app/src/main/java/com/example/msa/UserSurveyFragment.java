@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.msa.Model.DBHelper;
+import com.example.msa.Model.Question;
 import com.example.msa.Model.Survey;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class UserSurveyFragment extends Fragment {
 
     private String currentSurveys;
     private ArrayList<Survey> surveys;
-
+    int questionsNum;
     public UserSurveyFragment() {
         // Required empty public constructor
     }
@@ -31,7 +33,14 @@ public class UserSurveyFragment extends Fragment {
 
         LinearLayout layoutSurveys = view.findViewById(R.id.layoutSurveys);
 
-        ArrayList<Survey> surveys = getAvailableSurveys(); // Replace this with your method to fetch the available surveys
+        surveys = getAvailableSurveys(); // Replace this with your method to fetch the available surveys
+
+        // Retrieve the arguments bundle
+        Bundle args = getArguments();
+        if (args != null) {
+            // Extract the questionsNum value from the bundle
+            questionsNum = args.getInt("questionsNum", 0);
+        }
 
         for (Survey survey : surveys) {
             TextView surveyTextView = new TextView(requireContext());
@@ -60,10 +69,14 @@ public class UserSurveyFragment extends Fragment {
     }
 
     private void startActiveSurveyActivity(Survey survey) {
-        Intent intent = new Intent(requireContext(), ActiveSurvey.class);
-        int userId = ((UserPane) requireActivity()).loggedUser.getId();
-        intent.putExtra("userId", userId);
-        intent.putExtra("title", survey.getTitle());
-        startActivity(intent);
+        if(questionsNum == 10) {
+            Intent intent = new Intent(requireContext(), ActiveSurvey.class);
+            int userId = ((UserPane) requireActivity()).loggedUser.getId();
+            intent.putExtra("userId", userId);
+            intent.putExtra("title", survey.getTitle());
+            startActivity(intent);
+        }else{
+            Toast.makeText(requireContext(), "Not enough questions in Survey.", Toast.LENGTH_LONG).show();
+        }
     }
 }
