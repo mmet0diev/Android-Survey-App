@@ -82,7 +82,6 @@ public class ActivityAdminSurveys extends AppCompatActivity {
     }
 
 
-
     public class SurveyAdapter extends BaseAdapter {
         private ArrayList<Survey> surveys;
         private LayoutInflater inflater;

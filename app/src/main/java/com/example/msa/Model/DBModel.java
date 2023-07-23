@@ -62,7 +62,7 @@ public class DBModel extends SQLiteOpenHelper {
                     userIsAdminCol + " INTEGER NOT NULL COLLATE BINARY, " +
                     userLoginNameCol + " TEXT NOT NULL UNIQUE, " +
                     userPassCol + " TEXT NOT NULL, " +
-                    userSurveysCol + " TEXT NOT NULL UNIQUE )"; // Add the surveys column with a default value of an empty string
+                    userSurveysCol + " TEXT NOT NULL )"; // Add the surveys column with a default value of an empty string
 
             db.execSQL(sqlCreateStatement1);
             db.execSQL(sqlCreateStatement2);
