@@ -117,7 +117,7 @@ public class ActivityAdminQuestions extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = convertView;
-            if(view == null){
+            if (view == null) {
                 view = inflater.inflate(R.layout.activity_admin_questions_view, parent, false);
             }
 
@@ -126,7 +126,32 @@ public class ActivityAdminQuestions extends AppCompatActivity {
             TextView questTxt = view.findViewById(R.id.questiontxt);
             questTxt.setText(quest.toString());
 
+            Button removeButton = view.findViewById(R.id.removeButton);
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeQuestion(quest);
+                }
+            });
+
             return view;
+        }
+
+        // Method to remove the question from the list and database
+        public void removeQuestion(Question question) {
+            boolean success = dbModel.removeQuestion(question.getId());
+
+            if (success) {
+                // If removal was successful, update the question list and refresh the ListView
+                questions.remove(question);
+                notifyDataSetChanged();
+
+                // Show a message to the user indicating successful removal
+                Toast.makeText(ActivityAdminQuestions.this, "Question removed successfully.", Toast.LENGTH_SHORT).show();
+            } else {
+                // Handle the case where removal failed
+                Toast.makeText(ActivityAdminQuestions.this, "Failed to remove the question.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

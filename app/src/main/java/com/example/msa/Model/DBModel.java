@@ -299,6 +299,14 @@ public class DBModel extends SQLiteOpenHelper {
         return user;
     }
 
+    // Method to remove a question by its ID
+    public boolean removeQuestion(long questionId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(questionTable, questionColId + " = ?", new String[]{String.valueOf(questionId)});
+        db.close();
+        return result != 0; // Return true if the row was deleted, false otherwise
+    }
+
     public void removeSurvey(int surveyId) {
         SQLiteDatabase db = getWritableDatabase();
 

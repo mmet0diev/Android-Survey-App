@@ -9,6 +9,10 @@ public class Question {
         this.question = question;
     }
 
+    public int getId(){
+        return id;
+    }
+
     public String getText() {
         return question;
     }
